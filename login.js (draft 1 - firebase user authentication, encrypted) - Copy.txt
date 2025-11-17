@@ -1,0 +1,42 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js"
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDOZPd9ZS4c2A1-3v-mbJt3vKqKGFiAnpI",
+    authDomain: "linkedin-login-7705c.firebaseapp.com",
+    projectId: "linkedin-login-7705c",
+    storageBucket: "linkedin-login-7705c.firebasestorage.app",
+    messagingSenderId: "239296986266",
+    appId: "1:239296986266:web:9090865813124b953c3323"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth=getAuth(app)
+
+// submit button
+const submitSignIn = document.getElementById('signInBtn');
+submitSignIn.addEventListener("click", function (event) {
+    event.preventDefault()
+
+    // Inputs
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    //Sign In (create account method)...
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        alert("Signing In...");
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+    })
+    //...
+
+})
+
